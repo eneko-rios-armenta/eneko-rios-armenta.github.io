@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Population Analysis | Eneko Rios Armenta</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- MathJax script for rendering LaTeX -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a class="nav-name" href="index.html">← Eneko Rios Armenta</a>
+
+        <div class="nav-links">
+            <a href="#question">01 Question</a>
+            <a href="#data">02 Data</a>
+            <a href="#result">03 Result</a>
+            <a href="#robustness">04 Robustness</a>
+            <a href="#explanation">05 Physics</a>
+            <a href="#limitations">06 Limitations</a>
+            <a href="#conclusion">07 Conclusion</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Header -->
+        <section class="hero hero-project">
+            <p class="eyebrow">NASA EXOPLANET ARCHIVE · DATA ANALYSIS</p>
+
+            <h1>
+                Exoplanet Population Analysis
+            </h1>
+
+            <p class="hero-description">
+                Can planetary mass and radius reveal different <span>physical regimes</span> among exoplanets?
+            </p>
+
+            <div class="hero-links">
+                <a class="button primary" href="https://github.com/eneko-rios-armenta/exoplanet-analysis" target="_blank">
+                    View Code on GitHub ↗
+                </a>
+                <a class="button secondary" href="index.html#projects">
+                    ← Back to Portfolio
+                </a>
+            </div>
+
+            <!-- Main Mass-Radius Figure -->
+            <figure class="figure-card hero-figure">
+                <div class="figure-placeholder">
+                    <img src="images/exoplanet/mass_vs_radius.png" alt="Mass-Radius Distribution of Exoplanets">
+                </div>
+                <figcaption>
+                    <strong>Figure 1:</strong> Mass-radius distribution of confirmed exoplanets from the NASA Exoplanet Archive. Color indicates equilibrium temperature or orbital period.
+                </figcaption>
+            </figure>
+        </section>
+
+
+        <!-- 01 — THE QUESTION -->
+        <section id="question" class="section">
+            <div class="section-label">
+                <span>01</span>
+                Question
+            </div>
+
+            <div class="section-content">
+                <h2>
+                    Do exoplanet mass-radius relations exhibit discrete physical boundaries?
+                </h2>
+
+                <p>
+                    As the catalog of confirmed exoplanets grows, understanding the transitions between terrestrial planets, sub-Neptunes, gas giants, and brown dwarfs becomes essential to planetary science.
+                </p>
+
+                <p>
+                    This project investigates whether empirical mass-radius data reveal distinct power-law regimes or critical transition points that correspond to underlying physical structures (such as core composition, envelope retention, and degenerate equation-of-state behaviors).
+                </p>
+
+                <div class="key-points">
+                    <div class="point-item">
+                        <span>01</span>
+                        <strong>Transition Regimes</strong>
+                        <p>Identifying statistical break points in scaling relations between super-Earths and sub-Neptunes.</p>
+                    </div>
+                    <div class="point-item">
+                        <span>02</span>
+                        <strong>Equation of State Limits</strong>
+                        <p>Testing where electron degeneracy pressure causes radius plateauing in high-mass gas giants.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- 02 — THE DATA -->
+        <section id="data" class="section">
+            <div class="section-label">
+                <span>02</span>
+                Data
+            </div>
+
+            <div class="section-content">
+                <h2>
+                    NASA Exoplanet Archive Dataset & Filtering
+                </h2>
+
+                <p>
+                    Data was queried from the official NASA Exoplanet Archive PS (Planetary Systems) table, consisting of thousands of confirmed exoplanets with measured physical properties.
+                </p>
+
+                <p>
+                    To ensure robust statistical inference, raw observations were filtered based on measurement uncertainties and discovery methods:
+                </p>
+
+                <ul class="data-list">
+                    <li><strong>Precision Filtering:</strong> Excluded candidates with relative mass errors $\sigma_M / M > 20\%$ or radius errors $\sigma_R / R > 10\%$.</li>
+                    <li><strong>Detection Method Selection:</strong> Focused primarily on planets measured via transit photometry combined with radial velocity or transit timing variations (TTVs).</li>
+                    <li><strong>Derived Properties:</strong> Calculated mean bulk densities ($\rho$) and equilibrium temperatures ($T_{\text{eq}}$) based on stellar host parameters.</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- 03 — THE MAIN RESULT -->
+        <section id="result" class="section">
+            <div class="section-label">
+                <span>03</span>
+                Main Result
+            </div>
+
+            <div class="section-content">
+                <h2>
+                    Clear power-law slope changes at key mass thresholds
+                </h2>
+
+                <p>
+                    Fitting piecewise power-law models ($R \propto M^\gamma$) reveals statistically significant breakpoints in the scaling index $\gamma$.
+                </p>
+
+                <figure class="figure-card">
+                    <div class="figure-placeholder">
+                        <!-- Replace with image tag: <img src="images/breakpoint-plot.png" alt="Breakpoint Analysis"> -->
+                        <img src="images/exoplanet/mass_radius_breakpoint.png" alt="Breakpoint Analysis">
+                    </div>
+                    <figcaption>
+                        <strong>Figure 2:</strong> Piecewise linear regression showing slope transitions across terrestrial, volatile-rich, and gas giant mass ranges.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    The empirical exponent transitions sharply near $\sim 5\text{ }M_\oplus$, marking the shift from rocky interiors to volatile gas envelope retention, and again near Jupiter-mass scales where interior compression dominates.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- 04 — IS THE RESULT ROBUST? -->
+        <section id="robustness" class="section">
+            <div class="section-label">
+                <span>04</span>
+                Robustness
+            </div>
+
+            <div class="section-content">
+                <h2>
+                    Uncertainty quantification & resampling checks
+                </h2>
+
+                <p>
+                    To test whether these breaks are artifacts of sample selection or observational bias, we applied Monte Carlo error propagation and bootstrapping routines.
+                </p>
+
+                <figure class="figure-card">
+                    <div class="figure-placeholder">
+                        <img src="images/exoplanet/mass_radius_uncertainty.png" alt="Uncertainty & Sensitivity Plot">
+                    </div>
+                    <figcaption>
+                        <strong>Figure 3:</strong> Posterior distributions for breakpoint locations obtained via Bayesian Markov Chain Monte Carlo (MCMC) sampling.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    Resampling 10,000 synthetic catalogs within reported measurement error bounds confirms that the breakpoint locations remain consistent within confidence intervals.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- 05 — WHAT MIGHT EXPLAIN IT? -->
+        <section id="explanation" class="section">
+            <div class="section-label">
+                <span>05</span>
+                Explanation
+            </div>
+
+            <div class="section-content">
+                <h2>
+                    Physical mechanisms driving the transitions
+                </h2>
+
+                <p>
+                    The observed population structure aligns with key theoretical mechanisms in planetary formation and evolution:
+                </p>
+
+                <figure class="figure-card">
+                    <div class="figure-placeholder">
+                        <img src="images/exoplanet/large_planet_mass_distribution.png" alt="Large Planet Regime Analysis">
+                    </div>
+                    <figcaption>
+                        <strong>Figure 4:</strong> Radius evolution in the high-mass regime ($M > 1\text{ }M_J$) illustrating atmospheric inflation and degeneracy pressure balance.
+                    </figcaption>
+                </figure>
+
+                <p>
+                    In lower mass regimes, photoevaporation and core-accretion thresholds dictate atmospheric retention. At the upper end ($M > 1\text{ }M_J$), planetary radius becomes nearly independent of mass due to coulomb ionization and electron degeneracy in giant gas interiors.
+                </p>
+            </div>
+        </section>
+
+
+        <!-- 06 — LIMITATIONS -->
+        <section id="limitations" class="section">
+            <div class="section-label">
+                <span>06</span>
+                Limitations
+            </div>
+
+            <div class="section-content">
+                <h2>
+                    Selection effects & observational biases
+                </h2>
+
+                <p>
+                    While the results provide strong statistical trends, several limitations must be considered:
+                </p>
+
+                <ul class="data-list">
+                    <li><strong>Detection Bias:</strong> Transit surveys preferentially discover short-period planets, biasing the sample toward highly irradiated worlds.</li>
+                    <li><strong>Mass Precision:</strong> Planets measured via radial velocity often carry $\sin(i)$ inclination ambiguities unless combined with transits.</li>
+                    <li><strong>Stellar Age Variations:</strong> Young gas giants are thermally inflated, which broadens radius scatter for planets of similar mass.</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- 07 — CONCLUSION -->
+        <section id="conclusion" class="section">
+            <div class="section-label">
+                <span>07</span>
+                Conclusion
+            </div>
+
+            <div class="section-content">
+                <h2>
+                    Summary & future directions
+                </h2>
+
+                <p>
+                    This empirical analysis demonstrates clear structural shifts in the exoplanet population, mapping directly onto underlying astrophysical phase transitions.
+                </p>
+
+                <p>
+                    Future datasets from ongoing missions like TESS and upcoming facilities like PLATO will refine mass-radius precision, allowing finer mapping of composition boundaries and atmospheric retention limits.
+                </p>
+
+                <div class="hero-links" style="margin-top: 40px;">
+                    <a class="button primary" href="https://github.com/eneko-rios-armenta/exoplanet-analysis" target="_blank">
+                        View Full Project Code on GitHub ↗
+                    </a>
+                    <a class="button secondary" href="index.html#projects">
+                        ← Back to Portfolio
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Eneko Rios</p>
+        <p>
+            Built with HTML & CSS · Hosted on GitHub Pages
+        </p>
+    </footer>
+
+</body>
+
+</html>
