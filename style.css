@@ -659,7 +659,7 @@ figcaption strong {
     border-top: 1px solid #ddd;
 }
 
-.point-item span {
+.point-item > span {
     display: block;
     color: #315f9e;
     font-size: 11px;
@@ -686,4 +686,99 @@ figcaption strong {
     .figure-placeholder {
         height: 220px;
     }
+}
+
+
+/* Container for popup terms */
+.popup-term {
+    position: relative;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    color: #4f46e5;
+    text-decoration: underline dotted 1.5px;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Hover effect for the term */
+.popup-term:hover {
+    color: #3730a3;
+}
+
+/* Popup card */
+.popup-card {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+
+    width: 260px;
+    max-width: calc(100vw - 40px);
+    box-sizing: border-box;
+
+    background-color: #1e1e24;
+    color: #e2e8f0;
+    text-align: left;
+    border-radius: 8px;
+    padding: 12px 14px;
+
+    position: absolute;
+    z-index: 1000;
+    bottom: calc(100% + 10px);
+    left: 50%;
+
+    margin: 0;
+    transform: translateX(-50%) translateY(5px);
+
+    box-shadow:
+        0 10px 25px -5px rgba(0, 0, 0, 0.3),
+        0 8px 10px -6px rgba(0, 0, 0, 0.2);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    font-size: 0.85rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-decoration: none;
+
+    white-space: normal;
+    overflow-wrap: break-word;
+
+    transition:
+        opacity 0.25s ease,
+        transform 0.25s ease,
+        visibility 0.25s;
+
+    pointer-events: none;
+}
+
+/* Popup heading */
+.popup-card strong {
+    display: block;
+    color: #ffffff;
+    font-size: 0.95rem;
+    margin: 0 0 4px;
+}
+
+/* Small arrow below the popup */
+.popup-card::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1e1e24 transparent transparent transparent;
+}
+
+/* Show popup on hover or keyboard focus */
+.popup-term:hover .popup-card,
+.popup-term:focus .popup-card,
+.popup-term:focus-within .popup-card {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
